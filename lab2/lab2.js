@@ -126,15 +126,25 @@ console.log("Diện tích:", rectangle.calculateArea());
 // Bài 2: Sử dụng computed properties
 
 // // Tạo object configuration với computed property names
-// const env = "production";
-// const version = "v2";
-// const features = ["auth", "payment", "notification"];
+const env = "production";
+const version = "v2";
+const features = ["auth", "payment", "notification"];
 
 // // Tạo object config với:
 // // - key: `api_${env}_${version}`
 // // - key cho từng feature: `feature_${featureName}`
 // // - method: `get${env}Config()`
 
-// const config = {
-//   // Viết code ở đây
-// };
+const config = {
+  [`api_${env}_${version}`]: "https://api.example.com",
+  ...features.reduce((acc, feature) => {
+    acc[`feature_${feature}`] = true;
+    return acc;
+  }, {}),
+  [`get${env}Config`]() {
+    return `Cấu hình môi trường ${env} (phiên bản ${version})`;
+  },
+};
+console.log(config);
+console.log(config.getproductionConfig());
+
