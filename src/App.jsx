@@ -1,9 +1,13 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import Add from "./pages/Add";
+import List from "./pages/List";
+
 
 function App() {
   const [open, setOpen] = useState(false);
-
   return (
     <>
       {/* HEADER - Navbar Tailwind */}
@@ -43,17 +47,18 @@ function App() {
           </button>
 
           {/* Menu desktop */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="hover:text-gray-200">
-              Trang chủ
-            </a>
-            <a href="#" className="hover:text-gray-200">
-              Danh sách
-            </a>
-            <a href="#" className="hover:text-gray-200">
-              Thêm mới
-            </a>
-          </div>
+<div className="hidden md:flex items-center space-x-8">
+  <Link to="/" className="hover:text-gray-200">
+    Trang chủ
+  </Link>
+  <Link to="/list" className="hover:text-gray-200">
+    Danh sách
+  </Link>
+  <Link to="/add" className="hover:text-gray-200">
+    Thêm mới
+  </Link>
+</div>
+
 
           {/* Right menu desktop */}
           <div className="hidden md:flex items-center space-x-6">
@@ -65,29 +70,6 @@ function App() {
             </a>
           </div>
         </div>
-
-        {/* Mobile dropdown */}
-        {open && (
-          <div className="md:hidden bg-blue-700 border-t border-blue-500">
-            <div className="px-4 py-3 space-y-2">
-              <a href="#" className="block hover:text-gray-200">
-                Trang chủ
-              </a>
-              <a href="#" className="block hover:text-gray-200">
-                Danh sách
-              </a>
-              <a href="#" className="block hover:text-gray-200">
-                Thêm mới
-              </a>
-              <a href="#" className="block hover:text-gray-200">
-                Đăng nhập
-              </a>
-              <a href="#" className="block hover:text-gray-200">
-                Đăng ký
-              </a>
-            </div>
-          </div>
-        )}
       </nav>
 
       {/* MAIN CONTENT */}
@@ -95,7 +77,10 @@ function App() {
         <h1 className="text-4xl font-bold mb-4">Chào mừng đến với WEB501</h1>
         <p className="text-lg text-gray-600">Ứng dụng quản lý dữ liệu</p>
       </div>
-
+      <Routes>
+          <Route path="/list" element={<List />} />
+          <Route path="/add" element={<Add />} />
+        </Routes>
       <Toaster />
     </>
   );
